@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdf958fa7ba3cf438c086f07b48bd13, type: 3}
+  m_Name: Obstacle Flock Behavior
+  m_EditorClassIdentifier: 
+  behaviorStructs:
+  - behaviors: {fileID: 11400000, guid: 24ab5b2ca80026745b5492816a874f39, type: 2}
+    weights: 4
+  - behaviors: {fileID: 11400000, guid: 4dd0b743b76a6274b8974c3047bdc101, type: 2}
+    weights: 1
+  - behaviors: {fileID: 11400000, guid: ce47b096f82317d43b39df151115d37a, type: 2}
+    weights: 2
+  - behaviors: {fileID: 11400000, guid: 32e0c5a519b41ea49ae14a31a2ea7b21, type: 2}
+    weights: 0.1
+  - behaviors: {fileID: 11400000, guid: 6a3017d3b468699459d86a5687fd2a8a, type: 2}
+    weights: 5
+  - behaviors: {fileID: 11400000, guid: 74cda757ab6e06441900ec93d600987f, type: 2}
+    weights: 5

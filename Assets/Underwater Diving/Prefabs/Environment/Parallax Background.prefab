@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bf38aba251148898b4be0f47f9cdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSize: 9.6
-  parallaxSpeed: 0.3
+  backgroundSize: 0
+  parallaxSpeed: 0
 --- !u!1 &1349301628767024
 GameObject:
   m_ObjectHideFlags: 0
