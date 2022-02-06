@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    private Transform target;
-    [SerializeField]
-    private float smoothTime;
+    [SerializeField] private Transform target;
+    [SerializeField] private float smoothTime;
+    private PositionLimiter positionLimiter;
     private Vector3 offset;
     private Vector3 velocity;
+
+    private void Awake()
+    {
+        positionLimiter = GetComponent<PositionLimiter>();
+    }
 
     private void Start()
     {
@@ -19,6 +23,7 @@ public class CameraController : MonoBehaviour
         if (target != null)
         {
             transform.position = Vector3.SmoothDamp(transform.position, target.position + offset, ref velocity, smoothTime);
+            positionLimiter.Clamp();
         }
     }
 }

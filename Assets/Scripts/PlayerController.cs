@@ -13,14 +13,14 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float rotationSpeed;
 
-	private new Rigidbody2D rigidbody2D;
+	private new Rigidbody2D rigidbody;
 	private Animator animator;
 
 	private Vector3 lastInput;
 
 	private void Start()
 	{
-		rigidbody2D = GetComponent<Rigidbody2D>();
+		rigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 	}
 
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 		float y = Input.GetAxisRaw("Vertical");
 		lastInput = new Vector3(x, y, 0);
 
-		rigidbody2D.velocity = lastInput * (moveSpeed + speedMod);
+		rigidbody.velocity = lastInput * (moveSpeed + speedMod);
 	}
 
 	private void UpdateRotate()
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
 	private void UpdateFlip()
     {
-		float velocityX = rigidbody2D.velocity.x;
+		float velocityX = rigidbody.velocity.x;
 
 		if (velocityX != 0)
 			transform.localScale = new Vector3(Mathf.Sign(velocityX), 1, 1);
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
 	private void UpdateAnimation()
 	{
-		animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody2D.velocity.magnitude));
+		animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody.velocity.magnitude));
 		animator.SetBool("isRushing", isRushing);
 	}
 

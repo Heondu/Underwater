@@ -24,7 +24,7 @@ public class FlockAgent : MonoBehaviour
     public void Move(Vector3 velocity)
     {
         Flip(velocity);
-        transform.up = velocity;
+        transform.up = Vector3.Slerp(transform.up, velocity, Time.deltaTime * 5);
         transform.position += velocity * Time.deltaTime;
     }
 
