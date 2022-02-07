@@ -13,14 +13,14 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float rotationSpeed;
 
-	private new Rigidbody2D rigidbody;
+	private new Rigidbody rigidbody;
 	private Animator animator;
 
 	private Vector3 lastInput;
 
 	private void Start()
 	{
-		rigidbody = GetComponent<Rigidbody2D>();
+		rigidbody = GetComponent<Rigidbody>();
 		animator = GetComponent<Animator>();
 	}
 

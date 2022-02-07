@@ -23,7 +23,8 @@ public class CameraController : MonoBehaviour
         if (target != null)
         {
             transform.position = Vector3.SmoothDamp(transform.position, target.position + offset, ref velocity, smoothTime);
-            positionLimiter.Clamp();
+            if (positionLimiter != null)
+                positionLimiter.Clamp();
         }
     }
 }

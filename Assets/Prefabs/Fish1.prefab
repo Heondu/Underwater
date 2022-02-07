@@ -91,8 +91,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4405273095498329748}
-  - component: {fileID: -3721582842721862731}
-  - component: {fileID: -1051887535831383173}
+  - component: {fileID: -776788335316713415}
+  - component: {fileID: 7227211154771645451}
   m_Layer: 8
   m_Name: Fish1
   m_TagString: Untagged
@@ -115,7 +115,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &-3721582842721862731
+--- !u!58 &-776788335316713415
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-1051887535831383173
+--- !u!114 &7227211154771645451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
