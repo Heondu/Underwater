@@ -27,7 +27,7 @@ public class MakeTransparent : MonoBehaviour
 
         float cameraPlayerDistance = Vector3.Magnitude(Camera.main.transform.position - player.position);
         Ray rayForward = new Ray(Camera.main.transform.position, player.transform.position - Camera.main.transform.position);
-        Ray rayBackward = new Ray(Camera.main.transform.position, player.transform.position - Camera.main.transform.position);
+        Ray rayBackward = new Ray(Camera.main.transform.position, Camera.main.transform.position - player.transform.position);
         RaycastHit[] hitForwards = Physics.RaycastAll(rayForward, cameraPlayerDistance);
         RaycastHit[] hitBackwards = Physics.RaycastAll(rayBackward, cameraPlayerDistance);
 
