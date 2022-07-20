@@ -117,7 +117,7 @@ Material:
     - _Cutoff: 0.5
     - _Depth: 0.94
     - _DepthExp: 1
-    - _DepthHorizontal: 1.91
+    - _DepthHorizontal: 6.15
     - _DepthMode: 0
     - _DepthTexture: 1
     - _DepthVertical: 7.34
@@ -216,7 +216,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AnimationParams: {r: -1, g: -1, b: 1, a: 0}
-    - _BaseColor: {r: 0, g: 0.16451614, b: 0.34, a: 0.99215686}
+    - _BaseColor: {r: 0, g: 0.15686275, b: 0.34509805, a: 0.99215686}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _DepthMapBounds: {r: -402.3, g: -459.43, b: 0.0012693577, a: 0}
     - _DistanceNormalParams: {r: 0, g: 199.99988, b: 0.176, a: 0}
@@ -225,7 +225,7 @@ Material:
     - _HorizonColor: {r: 0.68, g: 1, b: 0.99, a: 0.15}
     - _IntersectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShallowColor: {r: 0, g: 1, b: 0.98007965, a: 0.3764706}
+    - _ShallowColor: {r: 0, g: 1.0039216, b: 0.972549, a: 0.3764706}
     - _SlopeParams: {r: 0.5, g: 4, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TranslucencyParams: {r: 1, g: 8, b: 0, a: 0}

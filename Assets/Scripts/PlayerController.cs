@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private GameObject bubbles;
 	[SerializeField] private float rotationSpeed;
+	[SerializeField] private LayerMask groundLayer;
 
 	private Status status;
 	private new Rigidbody rigidbody;
@@ -40,7 +41,6 @@ public class PlayerController : MonoBehaviour
     {
 		UpdateMove();
 		UpdateRotate();
-		//UpdateLimitY();
 	}
 
 	private void UpdateMove()
@@ -48,11 +48,17 @@ public class PlayerController : MonoBehaviour
 		float x = Input.GetAxisRaw("Horizontal");
 		float y = Input.GetAxisRaw("Vertical");
 		lastInput = new Vector3(x, y, 0);
+		Vector3 direction = lastInput;
 
-		rigidbody.velocity = lastInput.normalized * (!isRushing ? status.MoveSpeed : status.MoveSpeed + status.RushSpeed);
+		if (lastInput != Vector3.zero)
+			rigidbody.useGravity = false;
+		else
+			rigidbody.useGravity = true;
 
-		if (!isInWater && lastInput.y > 0)
-			transform.position = new Vector3(transform.position.x, 10, transform.position.z);
+		if (transform.position.y >= 5 && !Physics.Raycast(transform.position, Vector3.down, 1f, groundLayer) && lastInput.y > 0)
+			direction.y = 0;
+
+		rigidbody.velocity = direction.normalized * (!isRushing ? status.MoveSpeed : status.MoveSpeed + status.RushSpeed);
 	}
 
 	private void UpdateRotate()
@@ -132,19 +138,5 @@ public class PlayerController : MonoBehaviour
 	private void ClampRushTime()
 	{
 		currentRushTime = Mathf.Clamp(currentRushTime, 0, status.RushTime);
-	}
-
-	private void UpdateLimitY()
-    {
-		if (transform.position.y >= ScreenSettings.Instance.WaterLimitY)
-		{
-			ScreenSettings.Instance.ChangeScreen(ScreenType.air);
-			isInWater = false;
-		}
-		else
-		{
-			ScreenSettings.Instance.ChangeScreen(ScreenType.water);
-			isInWater = true;
-		}
 	}
 }

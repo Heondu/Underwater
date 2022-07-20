@@ -16,6 +16,7 @@ public class DepthOfWaterViewer : MonoBehaviour
 
     private void Update()
     {
-        text.text = $"{Mathf.RoundToInt((ScreenSettings.Instance.WaterLimitY - target.position.y) * factor)}";
+        float value = Mathf.Max(Mathf.RoundToInt((5 - target.position.y) * factor), 0);
+        text.text = $"{value}";
     }
 }
