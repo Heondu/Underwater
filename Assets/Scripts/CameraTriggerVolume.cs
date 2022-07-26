@@ -3,8 +3,10 @@ using Cinemachine;
 
 public class CameraTriggerVolume : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera enterCamera;
-    [SerializeField] private CinemachineVirtualCamera exitCamera;
+    [SerializeField]
+    private CinemachineVirtualCamera enterCamera;
+    [SerializeField]
+    private CinemachineVirtualCamera exitCamera;
 
     private void OnTriggerEnter(Collider other)
     {

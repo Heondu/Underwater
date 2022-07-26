@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81d4f1c37cfb9b4696d982df08a7441, type: 3}
   m_Name: AvoidCollider 1
   m_EditorClassIdentifier: 
-  maxForce: 2
-  maxSpeed: 3
+  maxForce: 1
+  maxSpeed: 1
   containmentBehavior: {fileID: -5769737824000778392}
   behaviors:
   - {fileID: 3267645291290633549}

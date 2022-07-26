@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
 
 	private Vector3 lastInput;
 	private bool isRushing = false;
-	private bool canRush = true;
-	private bool isInWater = true;
 	private float currentRushTime = 0;
 
 	[HideInInspector]
@@ -49,6 +47,13 @@ public class PlayerController : MonoBehaviour
 		float y = Input.GetAxisRaw("Vertical");
 		lastInput = new Vector3(x, y, 0);
 		Vector3 direction = lastInput;
+
+		//if (followCameraForward)
+		//{
+		//	Vector3 up = Camera.main.transform.up;
+		//	Vector3 right = Camera.main.transform.right;
+		//	direction = right * lastInput.x + up * lastInput.y;
+		//}
 
 		if (lastInput != Vector3.zero)
 			rigidbody.useGravity = false;
