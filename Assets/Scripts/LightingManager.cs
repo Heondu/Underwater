@@ -1,30 +1,31 @@
 using UnityEngine;
+using StylizedWater2;
 
 public class LightingManager : MonoBehaviour
 {
     [SerializeField]
-    private float lightDepth = 50;
-    [SerializeField]
-    private float maxDepth = 100;
-    [SerializeField]
     private Light globalLight;
     private Color globalLightMinColor;
     [SerializeField]
-    private Color globalLightMaxcolor;
+    private Color globalLightMaxColor;
     private Color ambientLightMinColor;
     [SerializeField]
-    private Color ambientLightMaxcolor;
+    private Color ambientLightMaxColor;
     private Color fogMinColor;
     [SerializeField]
-    private Color fogMaxcolor;
+    private Color fogMaxColor;
     [SerializeField]
-    private GameObject playerLight;
+    private float causticsBrightnessMin;
+    [SerializeField]
+    private float causticsBrightnessMax;
 
-    private DepthViewer depthViewer;
+    private DepthManager depthManager;
+    private UnderwaterRenderer underwaterRenderer;
 
     private void Awake()
     {
-        depthViewer = FindObjectOfType<DepthViewer>();
+        depthManager = FindObjectOfType<DepthManager>();
+        underwaterRenderer = FindObjectOfType<UnderwaterRenderer>();
     }
 
     private void Start()
@@ -36,13 +37,10 @@ public class LightingManager : MonoBehaviour
 
     private void Update()
     {
-        if (depthViewer.GetCurrentDepth() >= lightDepth)
-            playerLight.SetActive(true);
-        else
-            playerLight.SetActive(false);
-
-        globalLight.color = Color.Lerp(globalLightMinColor, globalLightMaxcolor, depthViewer.GetCurrentDepth() / maxDepth);
-        RenderSettings.ambientLight = Color.Lerp(ambientLightMinColor, ambientLightMaxcolor, depthViewer.GetCurrentDepth() / maxDepth);
-        RenderSettings.fogColor = Color.Lerp(fogMinColor, fogMaxcolor, depthViewer.GetCurrentDepth() / maxDepth);
+        float percent = depthManager.GetCurrentDepth() / depthManager.GetMaxDepth();
+        globalLight.color = Color.Lerp(globalLightMinColor, globalLightMaxColor, percent);
+        RenderSettings.ambientLight = Color.Lerp(ambientLightMinColor, ambientLightMaxColor, percent);
+        RenderSettings.fogColor = Color.Lerp(fogMinColor, fogMaxColor, percent);
+        underwaterRenderer.waterMaterial.SetFloat("_CausticsBrightness", Mathf.Lerp(causticsBrightnessMax, causticsBrightnessMin, percent));
     }
 }

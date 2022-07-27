@@ -4,25 +4,16 @@ using TMPro;
 public class DepthViewer : MonoBehaviour
 {
     private TextMeshProUGUI text;
-    private Transform target;
-    [SerializeField]
-    private float factor = 5;
-    private float currentDepth;
+    private DepthManager depthManager;
 
-    private void Start()
+    private void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
-        target = FindObjectOfType<PlayerController>().transform;
+        depthManager = FindObjectOfType<DepthManager>();
     }
 
     private void Update()
     {
-        currentDepth = Mathf.Max(Mathf.RoundToInt((5 - target.position.y) * factor), 0);
-        text.text = $"{currentDepth}";
-    }
-
-    public float GetCurrentDepth()
-    {
-        return currentDepth;
+        text.text = $"{depthManager.GetCurrentDepth()}";
     }
 }
