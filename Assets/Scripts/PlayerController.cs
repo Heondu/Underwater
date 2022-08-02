@@ -4,7 +4,8 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-	[SerializeField] private GameObject bubbles;
+	[SerializeField] private Bubbles bubbles;
+	[SerializeField] private Transform bubblesPoint;
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private LayerMask groundLayer;
 
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
 		UpdateRush();
 		UpdateFlip();
 		UpdateAnimation();
+
+		BlowBubbles();
 	}
 
     private void FixedUpdate()
@@ -90,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
 	private void UpdateAnimation()
 	{
-		animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody.velocity.magnitude));
+		//animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody.velocity.magnitude));
 		animator.SetBool("isRushing", isRushing);
 	}
 
@@ -99,8 +102,13 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.LeftShift) && !isRushing)
 		{
 			isRushing = true;
-			Instantiate(bubbles, gameObject.transform.position, gameObject.transform.rotation);
+			Bubbles clone = Instantiate(bubbles, gameObject.transform.position, gameObject.transform.rotation);
+			clone.SetDirection(Vector3.zero);
 		}
+		else if (Input.GetKeyUp(KeyCode.LeftShift) && isRushing)
+        {
+			isRushing = false;
+        }
 
 		if (isRushing)
 		{
@@ -143,5 +151,22 @@ public class PlayerController : MonoBehaviour
 	private void ClampRushTime()
 	{
 		currentRushTime = Mathf.Clamp(currentRushTime, 0, status.RushTime);
+	}
+
+	private void BlowBubbles()
+    {
+		if (Input.GetKeyDown(KeyCode.Space))
+        {
+			Bubbles clone = Instantiate(bubbles, bubblesPoint.position, gameObject.transform.rotation);
+			clone.SetDirection(GetDirection());
+		}
+    }
+
+	private Vector3 GetDirection()
+    {
+		Vector3 direction = lastInput;
+		if (direction == Vector3.zero)
+			direction = transform.localScale.x >= 0 ? Vector3.right : Vector3.left;
+		return direction.normalized;
 	}
 }

@@ -107,7 +107,7 @@ Material:
     - _Blend: 0
     - _BumpScale: 1
     - _CROSSPAN_INTERSECTIONOn: 1
-    - _CausticsBrightness: 0.030769229
+    - _CausticsBrightness: 0
     - _CausticsDistortion: 0.047
     - _CausticsOn: 1
     - _CausticsSpeed: 0.15

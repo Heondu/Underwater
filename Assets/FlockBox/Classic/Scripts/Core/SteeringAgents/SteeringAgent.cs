@@ -144,12 +144,13 @@ namespace CloudFine.FlockBox
 
             if (Velocity.magnitude > 0)
             {
-                transform.rotation = LookRotation(FlockBoxToWorldDirection(Velocity).normalized);
-                //Quaternion rot = LookRotation(FlockBoxToWorldDirection(Velocity).normalized);
-                //transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, rot.eulerAngles.x);
-                //if (Velocity.x != 0)
-			    //    transform.localScale = new Vector3(Mathf.Sign(Velocity.x), 1, 1);
+                //transform.rotation = LookRotation(FlockBoxToWorldDirection(Velocity).normalized);
+                Vector3 direction = transform.localScale.x >= 0 ? Velocity * -1 : Velocity;
+                Quaternion rot = LookRotation(FlockBoxToWorldDirection(direction).normalized);
+                transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, rot.eulerAngles.x);
                 Forward = Velocity;
+                if (Forward.x != 0)
+			        transform.localScale = new Vector3(Mathf.Sign(Forward.x), 1, 1);
             }
             else
             {
