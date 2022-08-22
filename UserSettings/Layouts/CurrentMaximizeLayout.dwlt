@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 13757
+  controlID: 50296
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 1
+  m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 13758
+  controlID: 50297
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 13759
+  controlID: 50298
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -186,8 +186,8 @@ MonoBehaviour:
     y: 0
     width: 484
     height: 774.6667
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -224,24 +224,24 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 8e23f9fffa28f9ff5a73f9ff6073f9ff987af9ff9e7af9ff247bf9ff2a7bf9ffc481f9ffca81f9ffc091f9ffc691f9ff1492f9ff1a92f9ffc4e0faffcae0faff065ffbff0c5ffbfff252fcffca66fcffa2c3fcff1e79fdfff67cfdffb891fdfffefaffff0867000040670000a6670000a6680000d0510100e65c0100485e0100386901007c920100ce92010046940100549401006c9401007e950100d89501001e960100aa960100e2960100f8960100409701004a970100f697010086a3020096a3020024a80200
+      scrollPos: {x: 0, y: 300}
+      m_SelectedIDs: 080b0100
+      m_LastClickedID: 68360
+      m_ExpandedIDs: c275f2ff20d7fdffbee1fdff2ae3fdffcce7fdffc4fbfdff28fefdffbefffdff0801feff5202feffd203feff8238feffd87affffd48effff1093ffff7695fffff6a6ffff24abfffffcfaffffd69400006c960000c6090100ae0a0100ec0a0100700d0100ce0d0100360e0100300f0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Sprite
-        m_OriginalName: Sprite
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 195478
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
@@ -533,9 +533,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.80629796, y: 3.0128016, z: -16.886892}
+    m_Target: {x: -10.66968, y: -6.197831, z: 3.2123375}
     speed: 2
-    m_Value: {x: 0.80629796, y: 3.0128016, z: -16.886892}
+    m_Value: {x: -10.66968, y: -6.197831, z: 3.2123375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -582,13 +582,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.111557856, y: -0.020476952, z: 0.0022628421, w: 0.9935772}
+    m_Target: {x: 0.17522244, y: -0.58865505, z: 0.13224581, w: 0.77811015}
     speed: 2
-    m_Value: {x: 0.11155423, y: -0.020476285, z: 0.0022627686, w: 0.9935449}
+    m_Value: {x: 0.17520826, y: -0.58860743, z: 0.13223511, w: 0.77804714}
   m_Size:
-    m_Target: 1.8302381
+    m_Target: 12.691351
     speed: 2
-    m_Value: 1.8302381
+    m_Value: 12.691351
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1282,22 +1282,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/FlockBox/Classic/Demo/Prefabs/Agents/SteeringAgents
+    - Assets/StylizedWater2/_Demo/Underwater/DemoAssets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/FlockBox/Classic/Demo/Prefabs/Agents/SteeringAgents
+  - Assets/StylizedWater2/_Demo/Underwater/DemoAssets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity Projects\Underwater
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 100.33331}
-    m_SelectedIDs: b2230100
-    m_LastClickedID: 74674
-    m_ExpandedIDs: 00000000ca6c0000cc6c0000ce6c0000d06c0000d26c0000d46c0000d66c0000d86c0000da6c0000dc6c0000de6c0000e06c0000e26c0000e46c0000e66c0000e86c0000f06c0000066d0000b4230100b6230100b8230100ba23010008ad010000ca9a3b
+    scrollPos: {x: 0, y: 724.3333}
+    m_SelectedIDs: 386d0000
+    m_LastClickedID: 27960
+    m_ExpandedIDs: 00000000f46c0000f66c0000f86c0000fa6c0000fc6c0000fe6c0000006d0000026d0000046d0000066d0000086d00000a6d00000c6d00000e6d0000106d0000126d0000306d0000326d0000406d0000486d0000566d0000586d00005a6d00005c6d0000126e0000547d0000587d000090b600001eb7000024b700003eb7000048b700006ab7000070b70000eab70000fcb700004eb800002ec80000ee230100fe230100002401000224010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1325,7 +1325,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ca6c0000cc6c0000ce6c0000d06c0000d26c0000d46c0000d66c0000d86c0000da6c0000dc6c0000de6c0000e06c0000e26c0000e46c0000e66c0000e86c000000ca9a3b
+    m_ExpandedIDs: 00000000f46c0000f66c0000f86c0000fa6c0000fc6c0000fe6c0000006d0000026d0000066d0000086d00000a6d00000c6d00000e6d0000106d0000126d0000306d0000326d0000406d0000486d0000566d0000586d00005a6d00005c6d0000126e0000547d0000587d000090b600001eb7000024b700003eb7000048b700006ab7000070b70000eab70000fcb700004eb800002ec80000ee230100fe230100002401000224010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1350,8 +1350,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 080b0100
+    m_LastClickedInstanceID: 68360
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000666900005aa0010002ad0100
     m_RenameOverlay:

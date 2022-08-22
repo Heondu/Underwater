@@ -12,11 +12,11 @@ Material:
   m_ValidKeywords:
   - _ADVANCED_SHADING
   - _CAUSTICS
+  - _ENVIRONMENTREFLECTIONS_OFF
   - _FOAM
   - _NORMALMAP
   - _REFRACTION
   - _SHARP_INERSECTION
-  - _TRANSLUCENCY
   - _WAVES
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -107,7 +107,7 @@ Material:
     - _Blend: 0
     - _BumpScale: 1
     - _CROSSPAN_INTERSECTIONOn: 1
-    - _CausticsBrightness: 0
+    - _CausticsBrightness: 1.3933333
     - _CausticsDistortion: 0.047
     - _CausticsOn: 1
     - _CausticsSpeed: 0.15
@@ -120,7 +120,7 @@ Material:
     - _DepthHorizontal: 6.15
     - _DepthMode: 0
     - _DepthTexture: 1
-    - _DepthVertical: 7.34
+    - _DepthVertical: 6.69
     - _DisableDepthTexture: 0
     - _DstBlend: 0
     - _EdgeFade: 16
@@ -216,7 +216,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AnimationParams: {r: -1, g: -1, b: 1, a: 0}
-    - _BaseColor: {r: 0, g: 0.15686275, b: 0.34509805, a: 0.99215686}
+    - _BaseColor: {r: 0, g: 0.32842934, b: 0.8018868, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _DepthMapBounds: {r: -402.3, g: -459.43, b: 0.0012693577, a: 0}
     - _DistanceNormalParams: {r: 0, g: 199.99988, b: 0.176, a: 0}
@@ -225,7 +225,7 @@ Material:
     - _HorizonColor: {r: 0.68, g: 1, b: 0.99, a: 0.15}
     - _IntersectionColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShallowColor: {r: 0, g: 1.0039216, b: 0.972549, a: 0.3764706}
+    - _ShallowColor: {r: 0.13809775, g: 0.42889416, b: 0.46226418, a: 1}
     - _SlopeParams: {r: 0.5, g: 4, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TranslucencyParams: {r: 1, g: 8, b: 0, a: 0}
