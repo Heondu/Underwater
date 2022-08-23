@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
 
 	private void UpdateMove()
 	{
-		float x = Input.GetAxisRaw("Horizontal");
-		float y = Input.GetAxisRaw("Vertical");
+		float x = PlayerInput.Horizontal;
+		float y = PlayerInput.Vertical;
 		lastInput = new Vector3(x, y, 0);
 		Vector3 direction = lastInput;
 
@@ -57,11 +57,6 @@ public class PlayerController : MonoBehaviour
 		//	Vector3 right = Camera.main.transform.right;
 		//	direction = right * lastInput.x + up * lastInput.y;
 		//}
-
-		if (lastInput != Vector3.zero)
-			rigidbody.useGravity = false;
-		else
-			rigidbody.useGravity = true;
 
 		if (transform.position.y >= 5 && !Physics.Raycast(transform.position, Vector3.down, 1f, groundLayer) && lastInput.y > 0)
 			direction.y = 0;
@@ -99,13 +94,13 @@ public class PlayerController : MonoBehaviour
 
 	private void UpdateRush()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftShift) && !isRushing)
+		if (PlayerInput.RushDown && !isRushing)
 		{
 			isRushing = true;
 			Bubbles clone = Instantiate(bubbles, gameObject.transform.position, gameObject.transform.rotation);
 			clone.SetDirection(Vector3.zero);
 		}
-		else if (Input.GetKeyUp(KeyCode.LeftShift) && isRushing)
+		else if (PlayerInput.RushUp && isRushing)
         {
 			isRushing = false;
         }
@@ -155,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
 	private void BlowBubbles()
     {
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (PlayerInput.BubbleDown)
         {
 			Bubbles clone = Instantiate(bubbles, bubblesPoint.position, gameObject.transform.rotation);
 			clone.SetDirection(GetDirection());

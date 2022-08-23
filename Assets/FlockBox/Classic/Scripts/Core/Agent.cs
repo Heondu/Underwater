@@ -41,14 +41,15 @@ namespace CloudFine.FlockBox
             protected set { m_velocity = value; }
         }
 
-        private Vector3 m_forward = Vector3.forward;
+        [SerializeField]
+        private Vector3 forward = Vector3.forward;
         /// <summary>
         /// Forward in local space. Magnitude will never be zero. Guaranteed to be normalized.
         /// </summary>
         public Vector3 Forward
         {
-            get { return m_forward; }
-            protected set { m_forward = value.normalized; }
+            get { return forward; }
+            protected set { forward = value.normalized; }
         }
 
         /// <summary>
