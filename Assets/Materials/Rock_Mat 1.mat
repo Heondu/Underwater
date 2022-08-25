@@ -193,7 +193,7 @@ Material:
     - _2ndColor: {r: 0.8018868, g: 0.67307407, b: 0.6405007, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _CoverageColor: {r: 0.7264151, g: 0.7137992, b: 0.6898659, a: 1}
+    - _CoverageColor: {r: 0.7675329, g: 0.7812818, b: 0.7924528, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SurfaceColor: {r: 1, g: 1, b: 1, a: 1}
