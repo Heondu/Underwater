@@ -4,6 +4,8 @@ using UnityEngine.Events;
 public class TriggerBox : MonoBehaviour
 {
     [SerializeField]
+    private EventID eventId;
+    [SerializeField]
     private string[] filterTags = new string[0];
 
     [SerializeField]
@@ -13,6 +15,9 @@ public class TriggerBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!eventId.CanEvent())
+            return;
+
         foreach (string tag in filterTags)
         {
             if (other.CompareTag(tag))
@@ -24,6 +29,9 @@ public class TriggerBox : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!eventId.CanEvent())
+            return;
+
         foreach (string tag in filterTags)
         {
             if (other.CompareTag(tag))

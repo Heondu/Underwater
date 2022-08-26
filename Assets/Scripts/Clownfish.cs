@@ -3,17 +3,17 @@ using UnityEngine;
 public class Clownfish : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 1;
-    [SerializeField]
-    private float rotationSpeed = 10;
-    [SerializeField]
     private float detectRadius = 2;
-    private LayerMask layerMask;
-    private Collider playerCollider;
+    [SerializeField]
+    private GameObject pieceOfLight;
     [SerializeField]
     private PathTweeing pathTweeing;
     [SerializeField]
-    private EventInfo eventInfo;
+    private EventID eventId;
+
+    private LayerMask layerMask;
+    private Collider playerCollider;
+
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class Clownfish : MonoBehaviour
 
     private void Update()
     {
-        if (!eventInfo.flag)
+        if (!eventId.CanEvent())
             return;
 
         if (CheckPlayer())
@@ -49,6 +49,17 @@ public class Clownfish : MonoBehaviour
             else return true;
         }
         return false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            pathTweeing.PauseFollow();
+            pieceOfLight.SetActive(false);
+            PieceOfLightManager.AddPieceOfLight();
+            eventId.SetEventFlag(true);
+        }
     }
 
     private void OnDrawGizmosSelected()

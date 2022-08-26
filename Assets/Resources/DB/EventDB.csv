@@ -1,2 +1,3 @@
-﻿ID,Chapter,Event,Flag
-0,1,1,FALSE
+﻿ID,ChapterID,ChapterName,EventID,EventName,PreID
+0,1,니모 추격전,1,니모와의 조우,-1
+1,1,니모 추격전,2,니모 추격 성공,0
