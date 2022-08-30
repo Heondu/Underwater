@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Transform bubblesPoint;
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private LayerMask groundLayer;
+	[SerializeField] private Animator[] animators;
 
 	private Status status;
 	private new Rigidbody rigidbody;
-	private Animator animator;
 
 	private Vector3 lastInput;
 	private bool isRushing = false;
@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
 	{
 		status = GetComponent<Status>();
 		rigidbody = GetComponent<Rigidbody>();
-		animator = GetComponent<Animator>();
 
 		currentRushTime = status.RushTime;
 	}
@@ -89,7 +88,8 @@ public class PlayerController : MonoBehaviour
 	private void UpdateAnimation()
 	{
 		//animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody.velocity.magnitude));
-		animator.SetBool("isRushing", isRushing);
+		if (PieceOfLightManager.PieceOfLightNum > 0)
+			animators[PieceOfLightManager.PieceOfLightNum].SetBool("isRushing", isRushing);
 	}
 
 	private void UpdateRush()

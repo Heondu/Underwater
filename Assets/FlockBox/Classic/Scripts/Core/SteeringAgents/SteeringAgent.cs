@@ -145,7 +145,7 @@ namespace CloudFine.FlockBox
             if (Velocity.magnitude > 0)
             {
                 // original
-                 
+                
                 transform.rotation = LookRotation(FlockBoxToWorldDirection(Velocity).normalized);
                 Forward = Velocity;
                 

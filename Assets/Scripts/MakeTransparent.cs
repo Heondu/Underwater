@@ -16,6 +16,9 @@ public class MakeTransparent : MonoBehaviour
 
     private void Update()
     {
+        if (!player)
+            return;
+
         MakeObjectSolid();
         GetAllTransparentObject();
         MakeObjectTransparent();
