@@ -3,6 +3,12 @@ using DG.Tweening;
 
 public class PathTweeing : MonoBehaviour
 {
+    private enum State
+    {
+        Play,
+        Pause
+    }
+
     [SerializeField]
     private float duration = 10;
     [SerializeField]
@@ -14,12 +20,16 @@ public class PathTweeing : MonoBehaviour
     [SerializeField]
     private bool playOnAwake = true;
     [SerializeField]
+    private bool autoRotation = true;
+    [SerializeField]
     private Transform[] wayPoints;
     private Vector3[] path;
     private Vector3 prevPos;
     private Vector3 direction;
+    private Tween tween;
+    private State state = State.Pause;
 
-    private void Start()
+    private void Awake()
     {
         TransformToVector3();
         FollowPath();
@@ -32,9 +42,12 @@ public class PathTweeing : MonoBehaviour
 
     private void Update()
     {
-        UpdateDirection();
-        UpdateFlip();
-        UpdateRotate();
+        if (state == State.Play)
+        {
+            UpdateDirection();
+            UpdateFlip();
+            UpdateRotate();
+        }
     }
 
     private void UpdateDirection()
@@ -65,16 +78,18 @@ public class PathTweeing : MonoBehaviour
 
     private void FollowPath()
     {
-        transform.DOPath(path, duration, pathType, pathMode, 10, Color.red);
+        tween = transform.DOPath(path, duration, pathType, pathMode, 10, Color.red);
     }
 
     public void PlayFollow()
     {
+        state = State.Play;
         transform.DOPlay();
     }
 
     public void PauseFollow()
     {
+        state = State.Pause;
         transform.DOPause();
     }
 
@@ -85,5 +100,10 @@ public class PathTweeing : MonoBehaviour
         {
             path[i] = wayPoints[i].position;
         }
+    }
+
+    public void SetSpeed(float speed)
+    {
+        tween.timeScale = speed;
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Clownfish : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Clownfish : MonoBehaviour
     private PathTweeing pathTweeing;
     [SerializeField]
     private EventID eventId;
+    [SerializeField]
+    private UnityEvent onTriggerEnter = new UnityEvent();
 
     private LayerMask layerMask;
     private Collider playerCollider;
@@ -59,6 +62,7 @@ public class Clownfish : MonoBehaviour
             pieceOfLight.SetActive(false);
             PieceOfLightManager.AddPieceOfLight();
             eventId.SetEventFlag(true);
+            onTriggerEnter.Invoke();
         }
     }
 

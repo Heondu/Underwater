@@ -51,7 +51,7 @@ MonoBehaviour:
     type: 0
     radius: 0.1
   debugDrawShape: 0
-  activeSettings: {fileID: 11400000, guid: b8b01cc6e72702247abd9e501f4ccd05, type: 2}
+  activeSettings: {fileID: 11400000, guid: 8d1e4fe45ab8cfd47be9dde7abe0b27b, type: 2}
 --- !u!1 &5546507504283617031
 GameObject:
   m_ObjectHideFlags: 0

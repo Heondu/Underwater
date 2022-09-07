@@ -11,8 +11,13 @@ public class PieceOfLight : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             onTriggerEnter.Invoke();
-            PieceOfLightManager.AddPieceOfLight();
+            AddPieceOfLight();
             Destroy(gameObject);
         }
+    }
+
+    public void AddPieceOfLight()
+    {
+        PieceOfLightManager.AddPieceOfLight();
     }
 }
