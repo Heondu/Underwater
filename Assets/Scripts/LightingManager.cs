@@ -43,4 +43,11 @@ public class LightingManager : MonoBehaviour
         RenderSettings.fogColor = Color.Lerp(fogMinColor, fogMaxColor, percent);
         underwaterRenderer.waterMaterial.SetFloat("_CausticsBrightness", Mathf.Lerp(causticsBrightnessMax, causticsBrightnessMin, percent));
     }
+
+    public void SetMaxColors(Color global, Color ambient, Color fog)
+    {
+        globalLightMaxColor = global;
+        ambientLightMaxColor = ambient;
+        fogMinColor = fog;
+    }
 }

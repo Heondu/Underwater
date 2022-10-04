@@ -6,6 +6,8 @@ public class EventTriggerBox : MonoBehaviour
     [SerializeField]
     private EventID eventId;
     [SerializeField]
+    private bool checkEventID = true;
+    [SerializeField]
     private string[] filterTags = new string[0];
 
     [SerializeField]
@@ -15,7 +17,7 @@ public class EventTriggerBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!eventId.CanEvent())
+        if (checkEventID && !eventId.CanEvent())
             return;
 
         foreach (string tag in filterTags)
@@ -29,7 +31,7 @@ public class EventTriggerBox : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!eventId.CanEvent())
+        if (checkEventID && !eventId.CanEvent())
             return;
 
         foreach (string tag in filterTags)

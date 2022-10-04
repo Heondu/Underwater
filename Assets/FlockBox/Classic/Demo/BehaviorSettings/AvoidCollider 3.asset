@@ -39,7 +39,7 @@ MonoBehaviour:
   weight: 50
   useTagFilter: 0
   filterTags: []
-  drawDebug: 1
+  drawDebug: 0
   debugColor: {r: 1, g: 1, b: 1, a: 1}
   debugDrawSteering: 1
   debugDrawProperties: 1

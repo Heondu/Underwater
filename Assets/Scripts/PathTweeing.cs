@@ -106,4 +106,9 @@ public class PathTweeing : MonoBehaviour
     {
         tween.timeScale = speed;
     }
+
+    public void MoveToLastWayPoint()
+    {
+        transform.position = wayPoints[wayPoints.Length - 1].position;
+    }
 }

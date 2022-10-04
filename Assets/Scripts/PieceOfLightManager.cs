@@ -13,4 +13,10 @@ public class PieceOfLightManager : MonoBehaviour
         pieceOfLightNum += 1;
         onPieceOfLightAdded.Invoke(pieceOfLightNum);
     }
+
+    public static void SetPieceOfLight(int num)
+    {
+        pieceOfLightNum = num;
+        onPieceOfLightAdded.Invoke(pieceOfLightNum);
+    }
 }

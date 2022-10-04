@@ -1,15 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EventID : MonoBehaviour
 {
-    public int chapterID;
     public int eventID;
-    public bool Flag => EventManager.GetEventFlag(this);
-    public bool PreEventFlag => EventManager.GetPreEventFlag(this);
+    public bool Flag => EventManager.GetEventFlag(eventID);
+    public bool PreEventFlag => EventManager.GetPreEventFlag(eventID);
+    [SerializeField]
+    private List<GameObject> activeList;
 
-    public void SetEventFlag(bool value = true)
+    private void Awake()
     {
-        EventManager.SetEventFlag(this, value);
+        EventManager.Instance.onEventFlagSetted.AddListener(Activate);
+        EventManager.Instance.onEventLoaded.AddListener(Activate);
     }
 
     public bool CanEvent()
@@ -17,5 +20,10 @@ public class EventID : MonoBehaviour
         if (!Flag && PreEventFlag)
             return true;
         else return false;
+    }
+
+    private void Activate()
+    {
+        
     }
 }

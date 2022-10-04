@@ -5,6 +5,8 @@ public class PieceOfLight : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent onTriggerEnter = new UnityEvent();
+    [SerializeField]
+    private GameObject effect;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +14,7 @@ public class PieceOfLight : MonoBehaviour
         {
             onTriggerEnter.Invoke();
             AddPieceOfLight();
+            Instantiate(effect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

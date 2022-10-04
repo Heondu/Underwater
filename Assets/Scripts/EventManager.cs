@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
     [System.Serializable]
-    private class SaveData
+    private class EventSaveData
     {
         public List<EventData> data;
     }
@@ -13,16 +14,12 @@ public class EventManager : MonoBehaviour
     private class EventData
     {
         public int ID;
-        public int ChapterID;
-        public int EventID;
         public int PreID;
         public bool Flag;
 
-        public EventData(int id, int chapterId, int eventId, int preId, bool flag)
+        public EventData(int id, int preId, bool flag)
         {
             ID = id;
-            ChapterID = chapterId;
-            EventID = eventId;
             PreID = preId;
             Flag = flag;
         }
@@ -40,8 +37,6 @@ public class EventManager : MonoBehaviour
     }
 
     private const string ID = "ID";
-    private const string CHAPTER_ID = "ChapterID";
-    private const string EVENT_ID = "EventID";
     private const string PRE_ID = "PreID";
 
     [SerializeField]
@@ -49,6 +44,9 @@ public class EventManager : MonoBehaviour
     [SerializeField] //인스펙터 보기전용
     private List<EventData> eventDatas;
     private static List<EventData> eventDataList;
+
+    public UnityEvent onEventFlagSetted = new UnityEvent();
+    public UnityEvent onEventLoaded = new UnityEvent();
 
     private void Start()
     {
@@ -63,18 +61,14 @@ public class EventManager : MonoBehaviour
 
     private static void Save()
     {
-        SaveData saveData = new SaveData();
+        EventSaveData saveData = new EventSaveData();
         saveData.data = eventDataList;
-        for (int i = 0; i < saveData.data.Count; i++)
-        {
-            Debug.Log($"{saveData.data[i].ID}, {saveData.data[i].ChapterID}, {saveData.data[i].EventID}, {saveData.data[i].Flag}");
-        }
-        SaveManager.SaveToJson(saveData, "SaveData");
+        SaveManager.SaveToJson(saveData, "EventSaveData");
     }
 
     private static void Load()
     {
-        SaveData saveData = SaveManager.LoadFromJson<SaveData>("SaveData");
+        EventSaveData saveData = SaveManager.LoadFromJson<EventSaveData>("EventSaveData");
         eventDataList = new List<EventData>();
         if (Instance.ResetOnAwake)
             ParseCSVDataToEvent();
@@ -86,6 +80,7 @@ public class EventManager : MonoBehaviour
                 ParseSaveDataToEvent(saveData);
         }
         Instance.eventDatas = eventDataList;
+        Instance.onEventLoaded.Invoke();
     }
 
     private static void ParseCSVDataToEvent()
@@ -94,44 +89,40 @@ public class EventManager : MonoBehaviour
         for (int i = 0; i < data.Count; i++)
         {
             int id = (int)data[i][ID];
-            int chapterId = (int)data[i][CHAPTER_ID];
-            int eventId = (int)data[i][EVENT_ID];
             int preId = (int)data[i][PRE_ID];
             bool flag = false;
-            eventDataList.Add(new EventData(id, chapterId, eventId, preId, flag));
+            eventDataList.Add(new EventData(id, preId, flag));
         }
     }
 
-    private static void ParseSaveDataToEvent(SaveData saveData)
+    private static void ParseSaveDataToEvent(EventSaveData saveData)
     {
         for (int i = 0; i < saveData.data.Count; i++)
         {
             int id = saveData.data[i].ID;
-            int chapterId = saveData.data[i].ChapterID;
-            int eventId = saveData.data[i].EventID;
             int preId = saveData.data[i].PreID;
             bool flag = saveData.data[i].Flag;
-            eventDataList.Add(new EventData(id, chapterId, eventId, preId, flag));
+            eventDataList.Add(new EventData(id, preId, flag));
         }
     }
 
-    public static bool GetEventFlag(EventID eventId)
+    public static bool GetEventFlag(int eventId)
     {
         for (int i = 0; i < eventDataList.Count; i++)
         {
-            if (eventDataList[i].ChapterID == eventId.chapterID && eventDataList[i].EventID == eventId.eventID)
+            if (eventDataList[i].ID == eventId)
                 return eventDataList[i].Flag;
         }
         Debug.Log("Can't not found event.");
         return false;
     }
 
-    public static bool GetPreEventFlag(EventID eventId)
+    public static bool GetPreEventFlag(int eventId)
     {
         int preId = -2;
         for (int i = 0; i < eventDataList.Count; i++)
         {
-            if (eventDataList[i].ChapterID == eventId.chapterID && eventDataList[i].EventID == eventId.eventID)
+            if (eventDataList[i].ID == eventId)
                 preId = eventDataList[i].PreID;
         }
 
@@ -155,13 +146,14 @@ public class EventManager : MonoBehaviour
         return false;
     }
 
-    public static void SetEventFlag(EventID eventId, bool flag)
+    public static void SetEventFlag(int eventId)
     {
         for (int i = 0; i < eventDataList.Count; i++)
         {
-            if (eventDataList[i].ChapterID == eventId.chapterID && eventDataList[i].EventID == eventId.eventID)
+            if (eventDataList[i].ID == eventId)
             {
-                eventDataList[i].Flag = flag;
+                eventDataList[i].Flag = true;
+                Instance.onEventFlagSetted.Invoke();
                 Save();
                 return;
             }
@@ -169,7 +161,7 @@ public class EventManager : MonoBehaviour
         Debug.Log("Can't not found event.");
     }
 
-    public static bool CheckEventFlag(EventID eventId)
+    public static bool CheckEventFlag(int eventId)
     {
         return !GetEventFlag(eventId) && GetPreEventFlag(eventId);
     }

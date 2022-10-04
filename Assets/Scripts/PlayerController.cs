@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private Animator[] animators;
+	[SerializeField] private GameObject[] playerCharacters;
 
 	private Status status;
 	private new Rigidbody rigidbody;
@@ -20,10 +21,11 @@ public class PlayerController : MonoBehaviour
 	[HideInInspector]
 	public UnityEvent<float, float> onRushValueChanged = new UnityEvent<float, float>();
 
-	private void Start()
+	private void Awake()
 	{
 		status = GetComponent<Status>();
 		rigidbody = GetComponent<Rigidbody>();
+		PieceOfLightManager.onPieceOfLightAdded.AddListener(UpdatePlayerCharacter);
 
 		currentRushTime = status.RushTime;
 	}
@@ -142,6 +144,17 @@ public class PlayerController : MonoBehaviour
 	{
 		onRushValueChanged.Invoke(status.RushTime, currentRushTime);
 	}
+
+	private void UpdatePlayerCharacter(int index)
+    {
+		for (int i = 0; i < playerCharacters.Length; i++)
+        {
+			if (i == index)
+				playerCharacters[i].SetActive(true);
+			else
+				playerCharacters[i].SetActive(false);
+        }
+    }
 
 	private void ClampRushTime()
 	{

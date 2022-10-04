@@ -25,24 +25,23 @@ public class Shark : MonoBehaviour
     [SerializeField]
     private PathTweeing pathTweeing;
     [SerializeField]
-    private Sprite chase;
+    private bool followPath = true;
     [SerializeField]
-    private Sprite prepare;
-    [SerializeField]
-    private Sprite attack;
+    private float speed = 5;
     [SerializeField]
     private EventID eventId;
+
     private bool isStart = false;
 
     private Transform target;
     private State state = State.Chase;
     private bool isFollow = true;
-    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     private void Start()
     {
         target = FindObjectOfType<PlayerController>().transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -54,13 +53,17 @@ public class Shark : MonoBehaviour
             if (!isStart)
             {
                 isStart = true;
-                pathTweeing.PlayFollow();
+                if (followPath)
+                    pathTweeing.PlayFollow();
             }
         }
 
         if (transform.position.x >= target.position.x)
         {
-            pathTweeing.SetSpeed(0);
+            if (!followPath)
+                transform.position += target.position - transform.position * speed * Time.deltaTime;
+            if (followPath)
+                pathTweeing.SetSpeed(0);
             return;
         }
 
@@ -93,7 +96,7 @@ public class Shark : MonoBehaviour
         }
         else
         {
-            spriteRenderer.sprite = chase;
+            animator.SetTrigger("Chase");
         }
     }
 
@@ -111,7 +114,7 @@ public class Shark : MonoBehaviour
         }
         else
         {
-            spriteRenderer.sprite = prepare;
+            animator.SetTrigger("Prepare");
         }
     }
 
@@ -132,7 +135,7 @@ public class Shark : MonoBehaviour
     {
         isFollow = false;
         pathTweeing.SetSpeed(attackSpeed);
-        spriteRenderer.sprite = attack;
+        animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(2f);
 

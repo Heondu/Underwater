@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PieceOfLightViewer : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         PieceOfLightManager.onPieceOfLightAdded.AddListener(UpdateImage);
     }

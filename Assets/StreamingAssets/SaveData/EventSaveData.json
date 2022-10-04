@@ -1,0 +1,29 @@
+{
+    "data": [
+        {
+            "ID": 0,
+            "PreID": -1,
+            "Flag": true
+        },
+        {
+            "ID": 1,
+            "PreID": 0,
+            "Flag": false
+        },
+        {
+            "ID": 2,
+            "PreID": 1,
+            "Flag": false
+        },
+        {
+            "ID": 3,
+            "PreID": 1,
+            "Flag": false
+        },
+        {
+            "ID": 4,
+            "PreID": 3,
+            "Flag": false
+        }
+    ]
+}

@@ -21,23 +21,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rock_Mat
-  m_Shader: {fileID: 4800000, guid: c61194769c49566439e564fcdf2deff8, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
-  - _BLENDNORMALS_ON
-  - _COVERAGEOVERLAYTYPE_WORLD_NORMAL
-  - _COVERAGE_ON
+  - _SPECULAR_SETUP
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1c776af18bc41204cadc3f3b0b8e3216, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -45,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageAlbedo:
-        m_Texture: {fileID: 2800000, guid: 0e4ffc8574f2aac4ba05d25cc340ecec, type: 3}
+        m_Texture: {fileID: 2800000, guid: f49bd42e23c149c43b3c87f67bb5637c, type: 3}
         m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _CoverageMask:
@@ -85,8 +84,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2d9060c08acd4a844bb600a63aa450ee, type: 3}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Texture: {fileID: 2800000, guid: 1c776af18bc41204cadc3f3b0b8e3216, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -109,7 +108,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SurfaceAlbedo:
-        m_Texture: {fileID: 2800000, guid: 2d9060c08acd4a844bb600a63aa450ee, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1c776af18bc41204cadc3f3b0b8e3216, type: 3}
         m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _SurfaceNormal:
@@ -187,14 +186,14 @@ Material:
     - _Tiling2: 1
     - _UseVertexColor: 0
     - _VertexColorChannel: 2
-    - _WorkflowMode: 1
+    - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
     - _2ndColor: {r: 0.8018868, g: 0.7907915, b: 0.66319567, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _CoverageColor: {r: 0.76397294, g: 0.7829002, b: 0.8207547, a: 1}
+    - _CoverageColor: {r: 0.6285689, g: 0.709371, b: 0.745283, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SurfaceColor: {r: 0.63584906, g: 0.94879127, b: 1, a: 1}
   m_BuildTextureStacks: []

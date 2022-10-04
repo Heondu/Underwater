@@ -4,10 +4,13 @@ public class DestroyObject : MonoBehaviour
 {
     [SerializeField]
     private float destroyTime;
+    [SerializeField]
+    private bool destroyOnAwake = true;
 
-    private void Start()
+    private void Awake()
     {
-        Destroy(destroyTime);
+        if (destroyOnAwake)
+            Destroy(destroyTime);
     }
 
     public void Destroy()

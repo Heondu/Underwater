@@ -61,7 +61,6 @@ public class Clownfish : MonoBehaviour
             pathTweeing.PauseFollow();
             pieceOfLight.SetActive(false);
             PieceOfLightManager.AddPieceOfLight();
-            eventId.SetEventFlag(true);
             onTriggerEnter.Invoke();
         }
     }
