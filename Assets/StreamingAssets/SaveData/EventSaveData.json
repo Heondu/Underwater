@@ -8,21 +8,21 @@
         {
             "ID": 1,
             "PreID": 0,
-            "Flag": false
+            "Flag": true
         },
         {
             "ID": 2,
             "PreID": 1,
-            "Flag": false
+            "Flag": true
         },
         {
             "ID": 3,
-            "PreID": 1,
+            "PreID": -1,
             "Flag": false
         },
         {
             "ID": 4,
-            "PreID": 3,
+            "PreID": 2,
             "Flag": false
         }
     ]

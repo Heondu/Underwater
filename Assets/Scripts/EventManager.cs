@@ -48,37 +48,20 @@ public class EventManager : MonoBehaviour
     public UnityEvent onEventFlagSetted = new UnityEvent();
     public UnityEvent onEventLoaded = new UnityEvent();
 
-    private void Start()
-    {
-        Load();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            Save();
-    }
-
-    private static void Save()
+    public static void Save()
     {
         EventSaveData saveData = new EventSaveData();
         saveData.data = eventDataList;
         SaveManager.SaveToJson(saveData, "EventSaveData");
     }
 
-    private static void Load()
+    public static void Load()
     {
         EventSaveData saveData = SaveManager.LoadFromJson<EventSaveData>("EventSaveData");
         eventDataList = new List<EventData>();
-        if (Instance.ResetOnAwake)
-            ParseCSVDataToEvent();
-        else
-        {
-            if (saveData == null)
-                ParseCSVDataToEvent();
-            else
-                ParseSaveDataToEvent(saveData);
-        }
+        ParseCSVDataToEvent();
+        if (!Instance.ResetOnAwake && saveData != null)
+            ParseSaveDataToEvent(saveData);
         Instance.eventDatas = eventDataList;
         Instance.onEventLoaded.Invoke();
     }
@@ -102,8 +85,23 @@ public class EventManager : MonoBehaviour
             int id = saveData.data[i].ID;
             int preId = saveData.data[i].PreID;
             bool flag = saveData.data[i].Flag;
-            eventDataList.Add(new EventData(id, preId, flag));
+
+            EventData eventData = FindEventData(id);
+            if (eventData != null)
+            {
+                eventData.Flag = flag;
+            }
         }
+    }
+
+    private static EventData FindEventData(int id)
+    {
+        foreach (EventData eventData in eventDataList)
+        {
+            if (eventData.ID == id)
+                return eventData;
+        }
+        return null;
     }
 
     public static bool GetEventFlag(int eventId)
@@ -113,7 +111,7 @@ public class EventManager : MonoBehaviour
             if (eventDataList[i].ID == eventId)
                 return eventDataList[i].Flag;
         }
-        Debug.Log("Can't not found event.");
+        Debug.Log($"[{eventId}] Can't not found event.");
         return false;
     }
 
@@ -132,7 +130,7 @@ public class EventManager : MonoBehaviour
         }
         if (preId == -2)
         {
-            Debug.Log("Can't not found preId.");
+            Debug.Log($"[{eventId}] Can't not found preId.");
             return false;
         }
 
@@ -142,7 +140,7 @@ public class EventManager : MonoBehaviour
                 return eventDataList[i].Flag;
         }
 
-        Debug.Log("Can't not found event.");
+        Debug.Log($"[{eventId}] Can't not found event.");
         return false;
     }
 
@@ -152,13 +150,14 @@ public class EventManager : MonoBehaviour
         {
             if (eventDataList[i].ID == eventId)
             {
+                Debug.Log(eventId);
                 eventDataList[i].Flag = true;
                 Instance.onEventFlagSetted.Invoke();
-                Save();
+                //Save();
                 return;
             }
         }
-        Debug.Log("Can't not found event.");
+        Debug.Log($"[{eventId}] Can't not found event.");
     }
 
     public static bool CheckEventFlag(int eventId)

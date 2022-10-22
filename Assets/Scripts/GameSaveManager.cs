@@ -29,16 +29,18 @@ public class GameSaveManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private bool ResetOnAwake = false;
-    [SerializeField]
-    private UnityEvent onNewGameStarted = new UnityEvent();
+    [SerializeField] private bool ResetOnAwake = false;
+    [SerializeField] private bool LoadPosition = true;
+    [SerializeField] private bool LoadEvent = true;
+
+    [SerializeField] private UnityEvent onNewGameStarted = new UnityEvent();
 
     private Transform player;
 
-    private void Start()
+    public void Init()
     {
         player = FindObjectOfType<PlayerController>().transform;
+        DataManager.Instance.Load();
         Load();
     }
 
@@ -50,12 +52,17 @@ public class GameSaveManager : MonoBehaviour
 
     public static void Save()
     {
+        EventManager.Save();
+
         GameData gameData = new GameData(Instance.player.position, PieceOfLightManager.PieceOfLightNum);
         SaveManager.SaveToJson(gameData, "GameSaveData");
     }
 
     private static void Load()
     {
+        if (Instance.LoadEvent)
+            EventManager.Load();
+
         GameData gameData = SaveManager.LoadFromJson<GameData>("GameSaveData");
         if (Instance.ResetOnAwake || gameData == null)
         {
@@ -64,7 +71,8 @@ public class GameSaveManager : MonoBehaviour
         }
         else
         {
-            Instance.player.position = gameData.playerPos;
+            if (Instance.LoadPosition)
+                Instance.player.position = gameData.playerPos;
             PieceOfLightManager.SetPieceOfLight(gameData.pieceOfLightNum);
         }
     }

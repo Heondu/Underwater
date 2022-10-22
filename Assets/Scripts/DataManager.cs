@@ -3,10 +3,21 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    private static DataManager instance;
+    public static DataManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<DataManager>();
+            return instance;
+        }
+    }
+
     private const string path = "DB/";
     private static List<Dictionary<string, object>> eventDB = new List<Dictionary<string, object>>();
 
-    private void Awake()
+    public void Load()
     {
         LoadFromCSV();
     }

@@ -18,7 +18,7 @@ public class DialogueInteraction : MonoBehaviour
             }
             if (colliders != null)
             {
-                colliders[0].GetComponent<YarnInteractable>().Interact();
+                //colliders[0].GetComponent<YarnInteractable>().Interact();
             }
         }
     }

@@ -22,6 +22,8 @@ public class PathTweeing : MonoBehaviour
     [SerializeField]
     private bool autoRotation = true;
     [SerializeField]
+    private bool loop = false;
+    [SerializeField]
     private Transform[] wayPoints;
     private Vector3[] path;
     private Vector3 prevPos;
@@ -46,7 +48,7 @@ public class PathTweeing : MonoBehaviour
         {
             UpdateDirection();
             UpdateFlip();
-            UpdateRotate();
+            UpdateRotation();
         }
     }
 
@@ -62,7 +64,7 @@ public class PathTweeing : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
     }
 
-    private void UpdateRotate()
+    private void UpdateRotation()
     {
         if (direction == Vector3.zero)
         {
@@ -78,7 +80,9 @@ public class PathTweeing : MonoBehaviour
 
     private void FollowPath()
     {
-        tween = transform.DOPath(path, duration, pathType, pathMode, 10, Color.red);
+        tween = transform.DOPath(path, duration, pathType, pathMode, 10, Color.red).SetEase(Ease.Linear);
+        if (loop)
+            tween.SetLoops(-1);
     }
 
     public void PlayFollow()

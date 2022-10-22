@@ -50,7 +50,7 @@ public class SavePoint : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (PlayerInput.Interact)
                 Activate();
         }
     }

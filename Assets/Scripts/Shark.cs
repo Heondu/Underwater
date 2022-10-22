@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Shark : MonoBehaviour
@@ -10,149 +9,50 @@ public class Shark : MonoBehaviour
         Attack
     }
 
-    [SerializeField]
-    private Transform attackPoint;
-    [SerializeField]
-    private float prepareDistance = 1f;
-    [SerializeField]
-    private float prepareSpeed = 0.5f;
-    [SerializeField]
-    private float attackDistance = 0.5f;
-    [SerializeField]
-    private float attackSpeed = 0;
-    [SerializeField]
-    private float rotationSpeed = 10;
-    [SerializeField]
-    private PathTweeing pathTweeing;
-    [SerializeField]
-    private bool followPath = true;
-    [SerializeField]
-    private float speed = 5;
-    [SerializeField]
-    private EventID eventId;
-
-    private bool isStart = false;
-
+    [Header("Components")]
     private Transform target;
-    private State state = State.Chase;
-    private bool isFollow = true;
     private Animator animator;
+
+    [Header("Values")]
+    [SerializeField] private float chaseSpeed = 5;
+    [SerializeField] private float prepareSpeed = 0.5f;
+    [SerializeField] private float attackSpeed = 0;
+    [SerializeField] private float prepareDistance = 0.5f;
+    [SerializeField] private float attackDistance = 0.5f;
+    [SerializeField] private float rotationSpeed = 10;
+    private float currentSpeed;
+
+    [Header("Collider")]
+    [SerializeField] private Vector3 size;
+
+    private bool canFollow = false;
+    private bool isFollow = true;
+    private State state = State.Chase;
 
     private void Start()
     {
         target = FindObjectOfType<PlayerController>().transform;
         animator = GetComponent<Animator>();
+        currentSpeed = chaseSpeed;
     }
 
     private void Update()
     {
-        if (!eventId.CanEvent())
+        if (!canFollow)
             return;
-        else
-        {
-            if (!isStart)
-            {
-                isStart = true;
-                if (followPath)
-                    pathTweeing.PlayFollow();
-            }
-        }
 
-        if (transform.position.x >= target.position.x)
-        {
-            if (!followPath)
-                transform.position += target.position - transform.position * speed * Time.deltaTime;
-            if (followPath)
-                pathTweeing.SetSpeed(0);
-            return;
-        }
-
-        UpdateRotate();
-
+        UpdatePosition();
+        UpdateRotation();
         if (isFollow)
-        {
-            switch (state)
-            {
-                case State.Attack:
-                    AttackState();
-                    break;
-                case State.Prepare:
-                    PrepareState();
-                    break;
-                case State.Chase:
-                    ChaseState();
-                    break;
-            }
-        }
+            UpdateState();
     }
 
-    private void ChaseState()
+    private void UpdatePosition()
     {
-        if (CalcPlayerDistance() <= prepareDistance)
-        {
-            state = State.Prepare;
-            pathTweeing.SetSpeed(prepareSpeed);
-
-        }
-        else
-        {
-            animator.SetTrigger("Chase");
-        }
+        transform.position += (target.position - transform.position).normalized * currentSpeed * Time.deltaTime;
     }
 
-    private void PrepareState()
-    {
-        if (CalcPlayerDistance() <= attackDistance)
-        {
-            state = State.Attack;
-            pathTweeing.SetSpeed(attackSpeed);
-        }
-        else if (CalcPlayerDistance() > prepareDistance + 1)
-        {
-            state = State.Chase;
-            pathTweeing.SetSpeed(1);
-        }
-        else
-        {
-            animator.SetTrigger("Prepare");
-        }
-    }
-
-    private void AttackState()
-    {
-        if (CalcPlayerDistance() > attackDistance + 1)
-        {
-            state = State.Prepare;
-            pathTweeing.SetSpeed(prepareSpeed);
-        }
-        else
-        {
-            StartCoroutine(AttackRoutine());
-        }
-    }
-
-    private IEnumerator AttackRoutine()
-    {
-        isFollow = false;
-        pathTweeing.SetSpeed(attackSpeed);
-        animator.SetTrigger("Attack");
-
-        yield return new WaitForSeconds(2f);
-
-        isFollow = true;
-    }
-
-    private float CalcPlayerDistance()
-    {
-        return Vector3.Distance(attackPoint.position, target.position);
-    }
-
-    private Vector3 CalcDirection()
-    {
-        return target.position - transform.position;
-    }
-
-    private void UpdateRotate()
+    private void UpdateRotation()
     {
         Vector3 direction = CalcDirection();
         if (direction.x != 0)
@@ -162,13 +62,79 @@ public class Shark : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void UpdateState()
     {
-        if (other.CompareTag("Player"))
+        if (state != State.Attack)
         {
-            if (!isFollow)
-                return;
-            StartCoroutine(AttackRoutine());
+            if (CalcPlayerDistance() <= attackDistance)
+            {
+                animator.SetTrigger("Attack");
+            }
         }
+
+        if (state == State.Chase)
+        {
+            if (CalcPlayerDistance() <= prepareDistance)
+                animator.SetTrigger("Prepare");
+            else
+                animator.SetTrigger("Chase");
+        }
+    }
+
+    private void PrepareState()
+    {
+        state = State.Prepare;
+        currentSpeed = prepareSpeed;
+    }
+
+    private void AttackState()
+    {
+        state = State.Attack;
+        isFollow = false;
+        currentSpeed = attackSpeed;
+    }
+
+    private void AttackEvent()
+    {
+        Collider[] colliders = Physics.OverlapBox(transform.position, size / 2, transform.rotation);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                GameManager.Instance.Restart(2f);
+                collider.gameObject.SetActive(false);
+                canFollow = false;
+            }
+        }
+    }
+
+    private void AttackEnd()
+    {
+        state = State.Chase;
+        isFollow = true;
+        currentSpeed = chaseSpeed;
+    }
+
+    private float CalcPlayerDistance()
+    {
+        return Vector3.Distance(transform.position, target.position);
+    }
+
+    private Vector3 CalcDirection()
+    {
+        return target.position - transform.position;
+    }
+
+    public void SetFollowState(bool value)
+    {
+        canFollow = value;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, size);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + Vector3.right * attackDistance, 0.2f);
     }
 }

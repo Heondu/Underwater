@@ -7,6 +7,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.DD5CDD96" = "way point"
+	"OpenInspectorPreview.DD5CDD96" = "0"
+	"currentGroup.DD5CDD96" = "scene"
 }
 providers = {
 	adb = {
@@ -53,6 +56,9 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"wa"
+	"W"
+	"Way pointsize:"
 ]
 searchItemFavorites = [
 ]

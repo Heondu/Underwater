@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 		UpdateMove();
-		UpdateRotate();
+		UpdateRotation();
 	}
 
 	private void UpdateMove()
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 		rigidbody.velocity = direction.normalized * (!isRushing ? status.MoveSpeed : status.MoveSpeed + status.RushSpeed);
 	}
 
-	private void UpdateRotate()
+	private void UpdateRotation()
     {
 		if (lastInput == Vector3.zero)
 		{

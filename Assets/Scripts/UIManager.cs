@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (PlayerInput.FishBook)
             fishBook.SetActive(!fishBook.activeSelf);
     }
 }

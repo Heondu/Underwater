@@ -9,7 +9,7 @@ public class EventID : MonoBehaviour
     [SerializeField]
     private List<GameObject> activeList;
 
-    private void Awake()
+    private void Start()
     {
         EventManager.Instance.onEventFlagSetted.AddListener(Activate);
         EventManager.Instance.onEventLoaded.AddListener(Activate);

@@ -10,9 +10,8 @@ public class Clownfish : MonoBehaviour
     [SerializeField]
     private PathTweeing pathTweeing;
     [SerializeField]
-    private EventID eventId;
-    [SerializeField]
     private UnityEvent onTriggerEnter = new UnityEvent();
+    private bool canFollow = false;
 
     private LayerMask layerMask;
     private Collider playerCollider;
@@ -25,7 +24,7 @@ public class Clownfish : MonoBehaviour
 
     private void Update()
     {
-        if (!eventId.CanEvent())
+        if (!canFollow)
             return;
 
         if (CheckPlayer())
@@ -69,5 +68,12 @@ public class Clownfish : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectRadius);
+    }
+
+    public void SetFollowState(bool value)
+    {
+        canFollow = value;
+        if (!value)
+            pathTweeing.PauseFollow();
     }
 }
