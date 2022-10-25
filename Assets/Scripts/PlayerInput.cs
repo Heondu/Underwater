@@ -15,8 +15,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private KeyCode rushKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode bubbleKey = KeyCode.Space;
     [SerializeField] private KeyCode interactKey = KeyCode.Space;
-    [SerializeField] private KeyCode fishBookKey = KeyCode.Escape;
+    [SerializeField] private KeyCode fishBookKey = KeyCode.P;
     [SerializeField] private KeyCode skipKey = KeyCode.Escape;
+    [SerializeField] private KeyCode soundSettingsKey = KeyCode.Escape;
 
     public static float Horizontal = 0;
     public static float Vertical = 0;
@@ -26,6 +27,7 @@ public class PlayerInput : MonoBehaviour
     public static bool Interact = false;
     public static bool FishBook = false;
     public static bool Skip = false;
+    public static bool SoundSettings = false;
 
     public static InputState inputState = InputState.Play;
 
@@ -41,6 +43,7 @@ public class PlayerInput : MonoBehaviour
             Interact = Input.GetKeyDown(interactKey);
             FishBook = Input.GetKeyDown(fishBookKey);
             Skip = false;
+            SoundSettings = Input.GetKeyDown(soundSettingsKey);
         }
         else if (inputState == InputState.Stop)
         {
@@ -52,6 +55,7 @@ public class PlayerInput : MonoBehaviour
             Interact = false;
             FishBook = false;
             Skip = Input.GetKeyDown(skipKey);
+            SoundSettings = false;
         }    
     }
 }

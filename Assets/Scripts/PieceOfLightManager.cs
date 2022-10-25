@@ -3,18 +3,29 @@ using UnityEngine.Events;
 
 public class PieceOfLightManager : MonoBehaviour
 {
-    private static int pieceOfLightNum = 0;
-    public static int PieceOfLightNum => pieceOfLightNum;
+    private static PieceOfLightManager instance;
+    public static PieceOfLightManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<PieceOfLightManager>();
+            return instance; 
+        }
+    }
 
-    public static UnityEvent<int> onPieceOfLightAdded = new UnityEvent<int>();
+    private int pieceOfLightNum = 0;
+    public int PieceOfLightNum => pieceOfLightNum;
 
-    public static void AddPieceOfLight()
+    public UnityEvent<int> onPieceOfLightAdded = new UnityEvent<int>();
+
+    public void AddPieceOfLight()
     {
         pieceOfLightNum += 1;
         onPieceOfLightAdded.Invoke(pieceOfLightNum);
     }
 
-    public static void SetPieceOfLight(int num)
+    public void SetPieceOfLight(int num)
     {
         pieceOfLightNum = num;
         onPieceOfLightAdded.Invoke(pieceOfLightNum);

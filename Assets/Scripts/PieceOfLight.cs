@@ -21,6 +21,6 @@ public class PieceOfLight : MonoBehaviour
 
     public void AddPieceOfLight()
     {
-        PieceOfLightManager.AddPieceOfLight();
+        PieceOfLightManager.Instance.AddPieceOfLight();
     }
 }

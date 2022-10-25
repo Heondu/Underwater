@@ -6,11 +6,7 @@ public class Clownfish : MonoBehaviour
     [SerializeField]
     private float detectRadius = 2;
     [SerializeField]
-    private GameObject pieceOfLight;
-    [SerializeField]
     private PathTweeing pathTweeing;
-    [SerializeField]
-    private UnityEvent onTriggerEnter = new UnityEvent();
     private bool canFollow = false;
 
     private LayerMask layerMask;
@@ -51,17 +47,6 @@ public class Clownfish : MonoBehaviour
             else return true;
         }
         return false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            pathTweeing.PauseFollow();
-            pieceOfLight.SetActive(false);
-            PieceOfLightManager.AddPieceOfLight();
-            onTriggerEnter.Invoke();
-        }
     }
 
     private void OnDrawGizmosSelected()

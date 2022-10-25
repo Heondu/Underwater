@@ -39,8 +39,6 @@ public class EventManager : MonoBehaviour
     private const string ID = "ID";
     private const string PRE_ID = "PreID";
 
-    [SerializeField]
-    private bool ResetOnAwake = false;
     [SerializeField] //인스펙터 보기전용
     private List<EventData> eventDatas;
     private static List<EventData> eventDataList;
@@ -60,7 +58,7 @@ public class EventManager : MonoBehaviour
         EventSaveData saveData = SaveManager.LoadFromJson<EventSaveData>("EventSaveData");
         eventDataList = new List<EventData>();
         ParseCSVDataToEvent();
-        if (!Instance.ResetOnAwake && saveData != null)
+        if (!GameSaveManager.ResetOnAwake && saveData != null)
             ParseSaveDataToEvent(saveData);
         Instance.eventDatas = eventDataList;
         Instance.onEventLoaded.Invoke();

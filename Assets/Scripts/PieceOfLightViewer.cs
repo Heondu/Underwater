@@ -5,7 +5,7 @@ public class PieceOfLightViewer : MonoBehaviour
 {
     private void Awake()
     {
-        PieceOfLightManager.onPieceOfLightAdded.AddListener(UpdateImage);
+        PieceOfLightManager.Instance.onPieceOfLightAdded.AddListener(UpdateImage);
     }
 
     private void UpdateImage(int value)

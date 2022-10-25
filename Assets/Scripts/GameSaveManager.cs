@@ -29,9 +29,9 @@ public class GameSaveManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private bool ResetOnAwake = false;
-    [SerializeField] private bool LoadPosition = true;
-    [SerializeField] private bool LoadEvent = true;
+    public static bool ResetOnAwake = false;
+    [SerializeField] private bool loadPosition = true;
+    [SerializeField] private bool loadEvent = true;
 
     [SerializeField] private UnityEvent onNewGameStarted = new UnityEvent();
 
@@ -48,32 +48,45 @@ public class GameSaveManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Save();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (ResetOnAwake)
+                ResetOnAwake = false;
+            Load();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            NewGame();
     }
 
     public static void Save()
     {
         EventManager.Save();
 
-        GameData gameData = new GameData(Instance.player.position, PieceOfLightManager.PieceOfLightNum);
+        GameData gameData = new GameData(Instance.player.position, PieceOfLightManager.Instance.PieceOfLightNum);
         SaveManager.SaveToJson(gameData, "GameSaveData");
     }
 
     private static void Load()
     {
-        if (Instance.LoadEvent)
+        if (Instance.loadEvent)
             EventManager.Load();
 
         GameData gameData = SaveManager.LoadFromJson<GameData>("GameSaveData");
-        if (Instance.ResetOnAwake || gameData == null)
+        if (ResetOnAwake || gameData == null)
         {
             Instance.onNewGameStarted.Invoke();
-            return;
         }
         else
         {
-            if (Instance.LoadPosition)
+            if (Instance.loadPosition)
                 Instance.player.position = gameData.playerPos;
-            PieceOfLightManager.SetPieceOfLight(gameData.pieceOfLightNum);
+            PieceOfLightManager.Instance.SetPieceOfLight(gameData.pieceOfLightNum);
         }
+    }
+
+    private static void NewGame()
+    {
+        ResetOnAwake = true;
+        GameManager.Instance.Restart();
     }
 }

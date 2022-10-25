@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 	{
 		status = GetComponent<Status>();
 		rigidbody = GetComponent<Rigidbody>();
-		PieceOfLightManager.onPieceOfLightAdded.AddListener(UpdatePlayerCharacter);
+		PieceOfLightManager.Instance.onPieceOfLightAdded.AddListener(UpdatePlayerCharacter);
 
 		currentRushTime = status.RushTime;
 	}
@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour
 	private void UpdateAnimation()
 	{
 		//animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody.velocity.magnitude));
-		if (PieceOfLightManager.PieceOfLightNum > 0)
-			animators[PieceOfLightManager.PieceOfLightNum].SetBool("isRushing", isRushing);
+		if (PieceOfLightManager.Instance.PieceOfLightNum > 0)
+			animators[PieceOfLightManager.Instance.PieceOfLightNum].SetBool("isRushing", isRushing);
 	}
 
 	private void UpdateRush()

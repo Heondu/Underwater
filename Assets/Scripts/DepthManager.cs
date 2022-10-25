@@ -37,7 +37,7 @@ public class DepthManager : MonoBehaviour
     private void Update()
     {
         UpdateDepth();
-        //ActivateAbility();
+        ActivateAbility();
     }
 
     private void UpdateDepth()
