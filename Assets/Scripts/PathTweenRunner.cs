@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Clownfish : MonoBehaviour
+public class PathTweenRunner : MonoBehaviour
 {
     [SerializeField]
     private float detectRadius = 2;

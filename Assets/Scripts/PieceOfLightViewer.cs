@@ -10,7 +10,7 @@ public class PieceOfLightViewer : MonoBehaviour
 
     private void UpdateImage(int value)
     {
-        if (value > 0)
-            transform.GetChild(value - 1).GetComponent<Image>().color = Color.white;
+        for (int i = 0; i < value; i++)
+            transform.GetChild(i).GetComponent<Image>().color = Color.white;
     }
 }

@@ -14,7 +14,7 @@ public class PieceOfLightManager : MonoBehaviour
         }
     }
 
-    private int pieceOfLightNum = 0;
+    private int pieceOfLightNum = 1;
     public int PieceOfLightNum => pieceOfLightNum;
 
     public UnityEvent<int> onPieceOfLightAdded = new UnityEvent<int>();

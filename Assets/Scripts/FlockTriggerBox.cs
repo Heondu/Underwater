@@ -33,7 +33,7 @@ public class FlockTriggerBox : MonoBehaviour
         {
             if (other.CompareTag(tag))
             {
-                flock.gameObject.SetActive(true);
+                //flock.gameObject.SetActive(true);
                 onTriggerEnter.Invoke();
             }
         }
@@ -45,7 +45,7 @@ public class FlockTriggerBox : MonoBehaviour
         {
             if (other.CompareTag(tag))
             {
-                flock.gameObject.SetActive(false);
+                //flock.gameObject.SetActive(false);
                 onTriggerExit.Invoke();
             }
         }

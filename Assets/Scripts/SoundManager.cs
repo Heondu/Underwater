@@ -27,26 +27,35 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(AudioClip clip)
     {
-        bgmPlayer.clip = clip;
-        bgmPlayer.Play();
-        //StopCoroutine(nameof(PlayBGMRoutine));
-        //StartCoroutine(nameof(PlayBGMRoutine), clip);
+        StopCoroutine(nameof(PlayBGMRoutine));
+        StartCoroutine(nameof(PlayBGMRoutine), clip);
+    }
+
+    public void PlayBGM(string clipName)
+    {
+        AudioClip clip = Resources.Load<AudioClip>("Sounds/BGM/" + clipName);
+        PlayBGM(clip);
     }
 
     private IEnumerator PlayBGMRoutine(AudioClip clip)
     {
-        yield return ChangeBGMRoutine(1, 0);
+        if (bgmPlayer.clip != null || bgmPlayer.clip != clip)
+            yield return ChangeBGMRoutine(1, 0, 0.5f);
+        else
+            bgmPlayer.volume = 0;
         bgmPlayer.clip = clip;
-        yield return ChangeBGMRoutine(0, 1);
         bgmPlayer.Play();
+        yield return ChangeBGMRoutine(0, 1, 0.5f);
     }
 
-    private IEnumerator ChangeBGMRoutine(float start, float end)
+    private IEnumerator ChangeBGMRoutine(float start, float end, float time)
     {
+        float current = 0;
         float percent = 0;
         while (percent < 1)
         {
-            percent += Time.deltaTime;
+            current += Time.deltaTime;
+            percent = current / time;
             bgmPlayer.volume = Mathf.Lerp(start, end, percent);
             yield return null;
         }
@@ -96,5 +105,10 @@ public class SoundManager : MonoBehaviour
                 audioSource.UnPause();
             }
         }
+    }
+
+    public string GetBGMName()
+    {
+        return bgmPlayer.clip.name;
     }
 }

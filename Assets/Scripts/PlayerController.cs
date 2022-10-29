@@ -90,8 +90,8 @@ public class PlayerController : MonoBehaviour
 	private void UpdateAnimation()
 	{
 		//animator.SetFloat("moveSpeed", Mathf.Abs(rigidbody.velocity.magnitude));
-		if (PieceOfLightManager.Instance.PieceOfLightNum > 0)
-			animators[PieceOfLightManager.Instance.PieceOfLightNum].SetBool("isRushing", isRushing);
+		if (PieceOfLightManager.Instance.PieceOfLightNum > 1)
+			animators[PieceOfLightManager.Instance.PieceOfLightNum - 1].SetBool("isRushing", isRushing);
 	}
 
 	private void UpdateRush()
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
 		for (int i = 0; i < playerCharacters.Length; i++)
         {
-			if (i == index)
+			if (i == index - 1)
 				playerCharacters[i].SetActive(true);
 			else
 				playerCharacters[i].SetActive(false);
@@ -177,4 +177,11 @@ public class PlayerController : MonoBehaviour
 			direction = transform.localScale.x >= 0 ? Vector3.right : Vector3.left;
 		return direction.normalized;
 	}
+
+	public bool IsMove()
+    {
+		if (lastInput != Vector3.zero)
+			return true;
+		return false;
+    }
 }

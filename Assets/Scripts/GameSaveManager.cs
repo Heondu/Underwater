@@ -10,11 +10,13 @@ public class GameSaveManager : MonoBehaviour
     {
         public Vector3 playerPos;
         public int pieceOfLightNum;
+        public string bgmName;
 
-        public GameData(Vector3 playerPos, int pieceOfLightNum)
+        public GameData(Vector3 playerPos, int pieceOfLightNum, string bgmName)
         {
             this.playerPos = playerPos;
             this.pieceOfLightNum = pieceOfLightNum;
+            this.bgmName = bgmName;
         }
     }
 
@@ -62,11 +64,13 @@ public class GameSaveManager : MonoBehaviour
     {
         EventManager.Save();
 
-        GameData gameData = new GameData(Instance.player.position, PieceOfLightManager.Instance.PieceOfLightNum);
+        GameData gameData = new GameData(Instance.player.position, PieceOfLightManager.Instance.PieceOfLightNum, SoundManager.Instance.GetBGMName());
         SaveManager.SaveToJson(gameData, "GameSaveData");
+
+        Debug.Log("Save");
     }
 
-    private static void Load()
+    public static void Load()
     {
         if (Instance.loadEvent)
             EventManager.Load();
@@ -81,7 +85,10 @@ public class GameSaveManager : MonoBehaviour
             if (Instance.loadPosition)
                 Instance.player.position = gameData.playerPos;
             PieceOfLightManager.Instance.SetPieceOfLight(gameData.pieceOfLightNum);
+            SoundManager.Instance.PlayBGM(gameData.bgmName);
         }
+
+        Debug.Log("Load");
     }
 
     private static void NewGame()
