@@ -14,7 +14,7 @@ public class Kraken : MonoBehaviour
 
     public UnityEvent onAttack;
 
-    private bool canAttack = false;
+    private bool canAttack = true;
 
     private void Start()
     {
